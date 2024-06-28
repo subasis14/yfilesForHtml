@@ -36,7 +36,6 @@ export class ContextMenu {
     if (this.element.childElementCount <= 0) {
       return;
     }
-
     const style = this.element.style;
     style.setProperty("position", "absolute", "");
     style.setProperty("left", `${location.x}px`, "");
@@ -49,7 +48,6 @@ export class ContextMenu {
     } else {
       document.body.appendChild(this.element);
     }
-
     setTimeout(() => {
       this.element.classList.add("demo-context-menu--visible");
     }, 0);
