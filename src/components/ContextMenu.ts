@@ -4,7 +4,7 @@ export class ContextMenu {
   element: HTMLElement;
   isOpen: boolean;
 
-  constructor(graphComponent: GraphComponent) {
+  constructor() {
     const contextMenu = document.createElement("div");
     contextMenu.setAttribute("class", "demo-context-menu");
     this.element = contextMenu;

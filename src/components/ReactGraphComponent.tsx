@@ -4,7 +4,6 @@ import {
   GraphEditorInputMode,
   IGraph,
   License,
-  ExteriorLabelModel,
   ShapeNodeStyle,
   SolidColorFill,
   PolylineEdgeStyle,
@@ -19,13 +18,15 @@ import {
 import { ContextMenu } from "./ContextMenu";
 import licenseData from "../license.json";
 import { graphData } from "./GraphData";
+import { SmallNode } from "./SmallNode";
+import { BigNode } from "./BigNode";
 
 License.value = licenseData;
 
 function configureContextMenu(graphComponent: GraphComponent): void {
   const inputMode = graphComponent.inputMode as GraphEditorInputMode;
 
-  const contextMenu = new ContextMenu(graphComponent);
+  const contextMenu = new ContextMenu();
 
   contextMenu.addOpeningEventListeners(graphComponent, (location) => {
     if (
@@ -53,7 +54,6 @@ function populateContextMenu(
 ): void {
   args.showMenu = true;
   contextMenu.clearItems();
-
   const node = args.item instanceof INode ? args.item : null;
   updateSelection(graphComponent, node);
 
@@ -108,14 +108,14 @@ function createSampleGraph(graph: IGraph): void {
       node.id === "dummy_node_aqtk1_run2_ins_below" ||
       node.id === "2_inS"
     ) {
-      const customNodeStyle = new ShapeNodeStyle({
-        fill: new SolidColorFill("#9D9897"),
-      });
+      const customNodeStyle = new SmallNode();
       graph.setStyle(graphNode, customNodeStyle);
-      const labelModel = new ExteriorLabelModel({ insets: 5 });
       const label = graph.addLabel(graphNode, node.label);
-      const labelParameter = labelModel.createParameter("east");
-      graph.setLabelLayoutParameter(label, labelParameter);
+
+      const labelParameter = customNodeStyle.getLabelParameter();
+      if (labelParameter) {
+        graph.setLabelLayoutParameter(label, labelParameter);
+      }
     } else if (node.id === "slide") {
       const customNodeStyle = new ShapeNodeStyle({
         fill: new SolidColorFill("#9D9897"),
@@ -135,9 +135,7 @@ function createSampleGraph(graph: IGraph): void {
       node.id === "Aqtk1_Run2" ||
       node.id === "Aqtk1_Run3"
     ) {
-      const customNodeStyle = new ShapeNodeStyle({
-        fill: new SolidColorFill("#E0DDDD"),
-      });
+      const customNodeStyle = new BigNode();
       graph.setStyle(graphNode, customNodeStyle);
       graph.addLabel(graphNode, node.label);
     } else {
@@ -184,6 +182,7 @@ export function ReactGraphComponent() {
 
     createSampleGraph(gc.graph);
     configureContextMenu(gc);
+
     return gc;
   }, []);
 
