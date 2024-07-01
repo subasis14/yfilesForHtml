@@ -14,6 +14,12 @@ import {
   ICommand,
   INode,
   PopulateItemContextMenuEventArgs,
+  GraphInputMode,
+  GraphItemTypes,
+  IndicatorNodeStyleDecorator,
+  IndicatorEdgeStyleDecorator,
+  Arrow,
+  GraphHighlightIndicatorManager,
 } from "yfiles";
 import { ContextMenu } from "./ContextMenu";
 import licenseData from "../license.json";
@@ -45,6 +51,55 @@ function configureContextMenu(graphComponent: GraphComponent): void {
   inputMode.contextMenuInputMode.addCloseMenuListener(() => {
     contextMenu.close();
   });
+}
+
+function configureHoverHighlight(
+  graphComponent: GraphComponent,
+  inputMode: GraphInputMode
+): void {
+  inputMode.itemHoverInputMode.enabled = true;
+  inputMode.itemHoverInputMode.hoverItems =
+    GraphItemTypes.NODE | GraphItemTypes.EDGE;
+  inputMode.itemHoverInputMode.discardInvalidItems = false;
+
+  // Add listener for hovered item changes
+  inputMode.itemHoverInputMode.addHoveredItemChangedListener(
+    (hoverInput, evt): void => {
+      const highlightManager = (
+        hoverInput.inputModeContext!.canvasComponent as GraphComponent
+      ).highlightIndicatorManager;
+      highlightManager.clearHighlights();
+      const item = evt.item;
+      if (item) {
+        highlightManager.addHighlight(item);
+      }
+    }
+  );
+
+  const nodeHighlightingStyle = new IndicatorNodeStyleDecorator({
+    wrapped: new ShapeNodeStyle({
+      shape: "rectangle",
+      stroke: "3px black",
+      fill: "transparent",
+    }),
+  });
+
+  const edgeHighlightStyle = new IndicatorEdgeStyleDecorator({
+    wrapped: new PolylineEdgeStyle({
+      targetArrow: new Arrow({
+        type: "triangle",
+        stroke: "2px black",
+      }),
+      stroke: "3px black",
+    }),
+  });
+
+  graphComponent.highlightIndicatorManager = new GraphHighlightIndicatorManager(
+    {
+      nodeStyle: nodeHighlightingStyle,
+      edgeStyle: edgeHighlightStyle,
+    }
+  );
 }
 
 function populateContextMenu(
@@ -182,7 +237,7 @@ export function ReactGraphComponent() {
 
     createSampleGraph(gc.graph);
     configureContextMenu(gc);
-
+    configureHoverHighlight(gc, gc.inputMode as GraphInputMode);
     return gc;
   }, []);
 
