@@ -192,14 +192,7 @@ function createSampleGraph(graph: IGraph): void {
       });
     }
 
-    if (
-      (edge.source === "dummy_node_aqtk1_ins_run_below" &&
-        edge.target === "dummy_node_ins_wait_below") ||
-      (edge.source === "Aqtk1_InS_Wait" &&
-        edge.target === "dummy_node_aqtk1_ins_run_stop") ||
-      (edge.source === "Aqtk1_Run2_Run3" &&
-        edge.target === "dummy_node_aqtk1_run2_ins_to_aqtk1_run3")
-    ) {
+    if (edge.arrow === "no") {
       const edgeStyle = new PolylineEdgeStyle({
         targetArrow: IArrow.NONE,
       });
