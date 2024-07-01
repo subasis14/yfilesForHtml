@@ -6,72 +6,86 @@ export const graphData = {
       id: "1_OoS",
       label: "1:OoS",
       position: new Rect(65, 100, 50, 10),
+      size: "small",
     },
     {
       id: "2_inS",
       label: "2:Ins",
       position: new Rect(325, 100, 50, 10),
+      size: "small",
     },
     {
       id: "3_run",
       label: "3:Run",
       position: new Rect(580, 100, 50, 10),
+      size: "small",
     },
     {
       id: "Aqtk1_OoS",
       label: "Aqtk1_OoS",
       position: new Rect(40, 140, 100, 30),
+      size: "big",
     },
     {
       id: "Aqtk1_InS",
       label: "Aqtk1_InS",
       position: new Rect(300, 140, 100, 30),
+      size: "big",
     },
     {
       id: "Aqtk1_Run",
       label: "Aqtk1_Run",
       position: new Rect(555, 140, 100, 30),
+      size: "big",
     },
     {
       id: "Aqtk1_OutOfService_Wait",
       label: "Aqtk1_OutOfService_Wait",
       position: new Rect(65, 190, 50, 10),
+      size: "small",
     },
 
     {
       id: "Aqtk1_InS_Wait",
       label: "Aqtk1_InS_Wait",
       position: new Rect(260, 220, 50, 10),
+      size: "small",
     },
     {
       id: "Aqtk1_InS_run",
       label: "Aqtk1_InS_run",
       position: new Rect(420, 220, 50, 10),
+      size: "small",
     },
     {
       id: "Aqtk1_Run2",
       label: "Aqtk1_Run2",
       position: new Rect(555, 240, 100, 30),
+      size: "big",
     },
     {
       id: "Aqtk1_Run_run2",
       label: "Aqtk1_Run_Run2",
       position: new Rect(580, 190, 50, 10),
+      size: "small",
     },
     {
       id: "Aqtk1_Run2_Run3",
       label: "Aqtk1_Run2_Run3",
       position: new Rect(500, 310, 50, 10),
+      size: "small",
     },
     {
       id: "Aqtk1_Run2_Ins",
       label: "Aqtk1_Run2_Ins",
       position: new Rect(680, 310, 50, 10),
+      size: "small",
     },
     {
       id: "Aqtk1_Run3",
       label: "Aqtk1_Run3",
       position: new Rect(580, 480, 100, 30),
+      size: "big",
     },
     {
       id: "dummy_node_ins_wait_below",
@@ -112,11 +126,13 @@ export const graphData = {
       id: "dummy_node_aqtk1_run2_ins_below",
       label: "Aqtk1_Ins",
       position: new Rect(740, 345, 0, 0),
+      size: "small",
     },
     {
       id: "dummy_node_aqtk1_run_below_aqtk1_ins_run",
       label: "Aqtk1_Run",
       position: new Rect(480, 250, 0, 0),
+      size: "small",
     },
     {
       id: "dummy_node_aqtk1_ins_run_stop",
@@ -167,11 +183,13 @@ export const graphData = {
       source: "Aqtk1_InS_Wait",
       target: "dummy_node_aqtk1_ins_run_stop",
       bends: [new Point(285, 300), new Point(440, 300)],
+      arrow: "no",
     },
     {
       source: "Aqtk1_Run2_Run3",
       target: "dummy_node_aqtk1_run2_ins_to_aqtk1_run3",
       bends: [new Point(525, 390), new Point(690, 390), new Point(705, 390)],
+      arrow: "no",
     },
     { source: "Aqtk1_OoS", target: "Aqtk1_OutOfService_Wait" },
     {
@@ -226,6 +244,7 @@ export const graphData = {
     {
       source: "dummy_node_aqtk1_ins_run_below",
       target: "dummy_node_ins_wait_below",
+      arrow: "no",
     },
   ],
 };

@@ -62,7 +62,6 @@ function configureHoverHighlight(
     GraphItemTypes.NODE | GraphItemTypes.EDGE;
   inputMode.itemHoverInputMode.discardInvalidItems = false;
 
-  // Add listener for hovered item changes
   inputMode.itemHoverInputMode.addHoveredItemChangedListener(
     (hoverInput, evt): void => {
       const highlightManager = (
@@ -150,19 +149,7 @@ function createSampleGraph(graph: IGraph): void {
 
   graphData.nodes.forEach((node) => {
     const graphNode = graph.createNode(node.position);
-    if (
-      node.id === "Aqtk1_OutOfService_Wait" ||
-      node.id === "1_OoS" ||
-      node.id === "3_run" ||
-      node.id === "Aqtk1_Run_run2" ||
-      node.id === "Aqtk1_Run2_Run3" ||
-      node.id === "Aqtk1_Run2_Ins" ||
-      node.id === "Aqtk1_InS_Wait" ||
-      node.id === "Aqtk1_InS_run" ||
-      node.id === "dummy_node_aqtk1_run_below_aqtk1_ins_run" ||
-      node.id === "dummy_node_aqtk1_run2_ins_below" ||
-      node.id === "2_inS"
-    ) {
+    if (node.size === "small") {
       const customNodeStyle = new SmallNode();
       graph.setStyle(graphNode, customNodeStyle);
       const label = graph.addLabel(graphNode, node.label);
@@ -183,13 +170,7 @@ function createSampleGraph(graph: IGraph): void {
           textFill: Fill.WHITE,
         })
       );
-    } else if (
-      node.id === "Aqtk1_OoS" ||
-      node.id === "Aqtk1_InS" ||
-      node.id === "Aqtk1_Run" ||
-      node.id === "Aqtk1_Run2" ||
-      node.id === "Aqtk1_Run3"
-    ) {
+    } else if (node.size === "big") {
       const customNodeStyle = new BigNode();
       graph.setStyle(graphNode, customNodeStyle);
       graph.addLabel(graphNode, node.label);
