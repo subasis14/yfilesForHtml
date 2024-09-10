@@ -1,4 +1,4 @@
-# dtcinfotech
+# POC OF yfiles
 
 Project for yFiles for Html
 
